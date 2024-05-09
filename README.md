@@ -1,5 +1,5 @@
 # GISPyHelpers Repository
-<kbd><img src="https://github.com/phiflip/GISPyHelpers/blob/main/icons/GISPyHelpers_HiRes_edit.png" width="200" alt="GISPy main logo type"></kbd>
+<img src="https://github.com/phiflip/GISPyHelpers/blob/main/icons/GISPyHelpers_HiRes_edit.png" width="220" alt="GISPy main logo type">
 
 Welcome to the GISPyHelpers Repository! This collection of scripts is designed to assist GIS professionals and enthusiasts in performing a variety of spatial analyses and data manipulations. Whether you're calculating offsets or analyzing vegetation through different indices, this repository has tools that can help streamline your workflows.
 
