@@ -2,7 +2,7 @@
 """
 Created on Mon Mar 23 16:47:31 2020
 
-@author: MinorNT
+@author: phiflip
 """
 import rasterio
 import rasterio.plot
