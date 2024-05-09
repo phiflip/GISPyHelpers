@@ -1,5 +1,6 @@
-# ignore ALL files in ANY directory named temp
-GIS_Data_Examples/
+# Ignore large files in GIS_Data_Examples directory
+GIS_Data_Examples/*
 
-__pycache__
-
+# Ignore Spyder project files and __pycache__ folder
+.spyproject/
+__pycache__/
