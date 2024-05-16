@@ -1,0 +1,1 @@
+python G:\GISPyHelpers\masked_vegetation_index_extraction_bash.py --shapefile_path "./zz_QGis/Shapefiles/Kernza_DSM.shp" --date "2024-03-19" --ndvi_threshold 0.0 --indices_to_save NDVI RGBVI

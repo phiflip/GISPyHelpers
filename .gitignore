@@ -1,5 +1,5 @@
 # Ignore large files in GIS_Data_Examples directory
-GIS_Data_Examples/*
+data/*
 
 # Ignore Spyder project files and __pycache__ folder
 .spyproject/

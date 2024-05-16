@@ -1,0 +1,1 @@
+python G:\GISPyHelpers\correct_xy_offset_bash.py --date "2024-03-19" --file_suffixes "_DSM.tif"
