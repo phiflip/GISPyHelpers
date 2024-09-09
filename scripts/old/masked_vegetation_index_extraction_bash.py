@@ -2,7 +2,7 @@
 """
 Created on Mon Mar 11 10:55:04 2019
 
-Updated for additional subfolder handling
+@author: phiflip
 """
 import os
 import argparse
@@ -19,15 +19,12 @@ sys.path.append('G:/GISPyHelpers/modules')
 
 import multichannel_index_definitions as mcvi
 
-def main(shapefile_path, date, ndvi_threshold, indices_to_save, subfolder=None):
+def main(shapefile_path, date, ndvi_threshold, indices_to_save):
     # Define the base path pattern
-    if subfolder:
-        base_path_pattern = os.path.join(date, subfolder, "Agisoft", "Agi_EXPORT")
-    else:
-        base_path_pattern = os.path.join(date, "Agisoft", "Agi_EXPORT")
+    base_path_pattern = os.path.join(date, "Agisoft", "Agi_EXPORT")
     
     # Reading data and setting paths
-    filename = date + "_allChannels.tif" #_xy_transformed
+    filename = date + "_allChannels_xy_transformed.tif"
     read_allChannels = os.path.join(base_path_pattern, filename)
 
     with fiona.open(shapefile_path, 'r') as shapefile:
@@ -133,7 +130,6 @@ if __name__ == "__main__":
     parser.add_argument("--date", required=True, help="Date of the dataset (format: YYYY-MM-DD)")
     parser.add_argument("--ndvi_threshold", type=float, required=True, help="NDVI threshold for mask")
     parser.add_argument("--indices_to_save", nargs='+', required=True, help="List of indices to save (e.g., NDVI WDRVI)")
-    parser.add_argument("--subfolder", required=False, help="Subfolder within the date directory")
 
     args = parser.parse_args()
-    main(args.shapefile_path, args.date, args.ndvi_threshold, args.indices_to_save, args.subfolder)
+    main(args.shapefile_path, args.date, args.ndvi_threshold, args.indices_to_save)

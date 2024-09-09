@@ -1,1 +1,3 @@
 python G:\GISPyHelpers\correct_xy_offset_bash.py --date "2024-03-19" --file_suffixes "_DSM.tif"
+
+python G:\GISPyHelpers\scripts\correct_xy_offset_bash.py --date "2024-05-22" --file_suffixes _DSM.tif _allChannels.tif --subfolder "sud-est"

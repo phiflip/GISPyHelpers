@@ -2,7 +2,7 @@
 """
 Created on Mon Mar 11 10:55:04 2019
 
-Updated for additional subfolder handling
+@author: phiflip
 """
 
 import os
@@ -12,12 +12,12 @@ from rasterio.transform import from_origin
 from matplotlib import pylab as plt
 import argparse
 
-def process_images(date, file_suffixes, subfolder=None):
+def process_images(date, file_suffixes):
     # Close all open plots to free up memory.
     plt.close("all")
 
     # Load the reference coordinates and shifts from the JSON file
-    json_path = f'shifts_{subfolder}.json' if subfolder else 'shifts.json'
+    json_path = 'shifts.json'
     with open(json_path, 'r') as f:
         data = json.load(f)
         reference_coordinateX = data["reference_coordinateX"]
@@ -36,10 +36,7 @@ def process_images(date, file_suffixes, subfolder=None):
     # Loop through each file suffix.
     for suffix in file_suffixes:
         # Define the path to the file for the current date and type.
-        if subfolder:
-            img_path = os.path.join(date, subfolder, 'Agisoft', 'Agi_EXPORT', f'{date}{suffix}')
-        else:
-            img_path = os.path.join(date, 'Agisoft', 'Agi_EXPORT', f'{date}{suffix}')
+        img_path = f'{date}/Agisoft/Agi_EXPORT/{date}{suffix}'
 
         # Attempt to open and process the image file.
         try:
@@ -74,7 +71,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process image files and apply coordinate shifts.")
     parser.add_argument("--date", required=True, help="Date of the dataset (format: YYYY-MM-DD)")
     parser.add_argument("--file_suffixes", required=True, nargs='+', help="List of file suffixes to process (e.g., _DSM.tif _allChannels.tif)")
-    parser.add_argument("--subfolder", required=False, help="Subfolder within the date directory")
 
     args = parser.parse_args()
-    process_images(args.date, args.file_suffixes, args.subfolder)
+    process_images(args.date, args.file_suffixes)

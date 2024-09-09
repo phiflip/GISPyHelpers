@@ -48,8 +48,8 @@ def DTM_PixelSizeSensitive(DSM_as_array, pixelsize, plot):
     
     pixelsize_in_cm = round(pixelsize, 3) * 100
 
-    DSM_as_array[DSM_as_array == -32767.0] = np.nan  # '-32767' kann nicht interpoliert werden!
-    DSM_interpolated = fillnodata(DSM_as_array.copy(), mask=DSM_as_array, max_search_distance=int((4 / pixelsize_in_cm) * 80), smoothing_iterations=0)
+    # DSM_as_array[DSM_as_array == -32767.0] = np.nan  # '-32767' kann nicht interpoliert werden!
+    DSM_interpolated = fillnodata(DSM_as_array.copy(), mask=DSM_as_array!= -32767.0, max_search_distance=int((4 / pixelsize_in_cm) * 80), smoothing_iterations=0)
     DSM_interpolated = DSM_interpolated[0].astype(float)
     
     # Find minimas
@@ -62,7 +62,8 @@ def DTM_PixelSizeSensitive(DSM_as_array, pixelsize, plot):
     DTM_scnd_interpolated = fillnodata(DTM_minimas_cleaned.copy(), mask=DTM_minimas_cleaned != -32767.0, max_search_distance=int((4 / pixelsize_in_cm) * 25), smoothing_iterations=0) 
     # Smoothing
     DTM_final = ndi.gaussian_filter(DTM_scnd_interpolated, sigma=(4 / pixelsize_in_cm) * 38, truncate=1.5)
-   
+
+    
     DTM_final[DTM_final == 0.0] = np.nan
     
     if plot:
@@ -91,11 +92,11 @@ def CTM_PixelSizeSensitive(CEM_as_array, pixelsize, plot):
     
     pixelsize_in_cm = round(pixelsize, 3) * 100
     
-    CEM_as_array[CEM_as_array == -32767.0] = np.nan  # '-32767' kann nicht interpoliert werden!
+    # CEM_as_array[CEM_as_array == -32767.0] = np.nan  # '-32767' kann nicht interpoliert werden!
     
     CEM_as_array = CEM_as_array * 100  # Not able to interpolate values smaller than 1
 
-    CEM_interpolated = fillnodata(CEM_as_array.copy(), mask=CEM_as_array, max_search_distance=int((4 / pixelsize_in_cm) * 80), smoothing_iterations=0)
+    CEM_interpolated = fillnodata(CEM_as_array.copy(), mask=CEM_as_array!=-32767.0, max_search_distance=int((4 / pixelsize_in_cm) * 80), smoothing_iterations=0)
     CEM_interpolated = CEM_interpolated.astype(float)
     
     # Find minimas

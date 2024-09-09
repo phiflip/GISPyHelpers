@@ -1,1 +1,6 @@
 python G:\GISPyHelpers\masked_vegetation_index_extraction_bash.py --shapefile_path "./zz_QGis/Shapefiles/Kernza_DSM.shp" --date "2024-03-19" --ndvi_threshold 0.0 --indices_to_save NDVI RGBVI
+
+python G:\GISPyHelpers\scripts\masked_vegetation_index_extraction_bash.py --shapefile_path ".\zz_QGis\Shapefiles\sud-est_DSM.shp" --date "2024-05-22" --ndvi_threshold 0.1 --indices_to_save NDVI WDRVI --subfolder "sud-est"
+
+
+python G:\GISPyHelpers\scripts\masked_vegetation_index_extraction_bash.py --shapefile_path "./zz_QGis/Shapefiles/Area_DSM.shp" --date "2020-06-03, 2020-07-05" --ndvi_threshold 0.0 --indices_to_save NDVI
