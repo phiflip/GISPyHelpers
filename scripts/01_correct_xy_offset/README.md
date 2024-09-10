@@ -27,13 +27,13 @@ python correct_xy_offset.py [date] --file_suffixes [suffix1] [suffix2] ... [suff
 If you have images from the date `2020-06-03` stored in a directory, and these directories have a subfolder called `south`, and you want to correct files with suffixes `_allChannels` and `_DSM`, run the script as follows:
 
 ```bash
-python correct_xy_offset.py 2020-06-03 --file_suffixes _allChannels _DSM --subfolder south
+python correct_xy_offset.py --date 2020-06-03 --file_suffixes _allChannels.tif _DSM.tif --subfolder south
 ```
 
 If there is no subfolder, simply omit the `--subfolder` option:
 
 ```bash
-python correct_xy_offset.py 2020-06-03 --file_suffixes _allChannels _DSM
+python correct_xy_offset.py --date 2020-06-03 --file_suffixes _allChannels.tif _DSM.tif
 ```
 
 ## Dependencies
