@@ -29,13 +29,13 @@ python calculate_derivedDTM.py [shapefile_path] [date] --subfolder [subfolder_na
 If you have a shapefile located at `G:/GISData/Regions.shp` and want to process data from the date `2020-06-03`, with results stored in a subfolder called `south`, run the script as follows:
 
 ```bash
-python calculate_derivedDTM.py G:/GISData/Regions.shp 2020-06-03 --subfolder south
+python calculate_derivedDTM.py --shapefile G:/GISData/Regions.shp --date 2020-06-03 --subfolder south
 ```
 
 If there is no subfolder, simply omit the `--subfolder` option:
 
 ```bash
-python calculate_derivedDTM.py G:/GISData/Regions.shp 2020-06-03
+python calculate_derivedDTM.py --shapefile G:/GISData/Regions.shp --date 2020-06-03
 ```
 
 ## Dependencies
