@@ -12,5 +12,3 @@ These scripts are developed with usability and flexibility in mind, catering to 
 ## Getting Started
 To get started with these scripts, clone this repository to your local machine and refer to the individual script documentation for specific usage instructions.
 
-```bash
-git clone [URL of the repository]
