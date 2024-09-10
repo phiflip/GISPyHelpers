@@ -2,7 +2,7 @@
 # Correct XY Offset Bash Script
 
 ## Description
-This script, `correct_xy_offset_bash.py`, is designed to correct XY offsets in image data. The script processes image files, applies necessary transformations based on reference coordinates, and handles additional subfolder structures if present.
+This script, `correct_xy_offset.py`, is designed to correct XY offsets in image data. The script processes image files, applies necessary transformations based on reference coordinates, and handles additional subfolder structures if present.
 
 The script reads offset values from a JSON file, applies the shifts to the images, and can handle multiple date directories if needed.
 
@@ -15,7 +15,7 @@ The script reads offset values from a JSON file, applies the shifts to the image
 To run this script, use the following command in your terminal or command prompt:
 
 ```bash
-python correct_xy_offset_bash.py [date] --file_suffixes [suffix1] [suffix2] ... [suffixN] --subfolder [subfolder_name]
+python correct_xy_offset.py [date] --file_suffixes [suffix1] [suffix2] ... [suffixN] --subfolder [subfolder_name]
 ```
 
 - **`[date]`**: The date string representing the directory to process.
@@ -24,16 +24,16 @@ python correct_xy_offset_bash.py [date] --file_suffixes [suffix1] [suffix2] ... 
 
 ### Example
 
-If you have images from the date `2020-06-03` stored in a directory, and these directories have a subfolder called `Data`, and you want to correct files with suffixes `_B01` and `_B02`, run the script as follows:
+If you have images from the date `2020-06-03` stored in a directory, and these directories have a subfolder called `south`, and you want to correct files with suffixes `_allChannels` and `_DSM`, run the script as follows:
 
 ```bash
-python correct_xy_offset_bash.py 2020-06-03 --file_suffixes _B01 _B02 --subfolder Data
+python correct_xy_offset.py 2020-06-03 --file_suffixes _allChannels _DSM --subfolder south
 ```
 
 If there is no subfolder, simply omit the `--subfolder` option:
 
 ```bash
-python correct_xy_offset_bash.py 2020-06-03 --file_suffixes _B01 _B02
+python correct_xy_offset.py 2020-06-03 --file_suffixes _allChannels _DSM
 ```
 
 ## Dependencies
@@ -53,18 +53,20 @@ The script expects a JSON file containing the shift values for the coordinates. 
 
 The JSON file should have the following structure:
 
+
 ```json
 {
-  "2020-06-03": {
-    "x_shift": 5.0,
-    "y_shift": -3.2
-  },
-  "2020-06-04": {
-    "x_shift": 2.1,
-    "y_shift": -1.0
+  "reference_coordinateX": 601910.88,
+  "reference_coordinateY": 204438.01,
+  "shifts": {
+    "2020-07-05": [601911.02, 204439.02]
   }
 }
 ```
 
-In this example, `x_shift` and `y_shift` represent the offset values for correcting the images taken on the respective dates.
+In this example:
+- `reference_coordinateX` and `reference_coordinateY` represent the base reference coordinates.
+- Under `shifts`, each date is associated with the corrected X and Y coordinates.
+
+
 
