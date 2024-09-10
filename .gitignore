@@ -1,6 +1,6 @@
 # Ignore large files in GIS_Data_Examples directory
 data/*
-
+G:/GISPyHelpers/scripts/no_bash_scripts/*
 # Ignore Spyder project files and __pycache__ folder
 .spyproject/
 __pycache__/
