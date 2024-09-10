@@ -1,1 +1,0 @@
-python G:\GISPyHelpers\scripts\calculate_derivedDTM_bash.py --date "2024-05-22" --pixel_size_factor 1.0 --subfolder "sud-est" --shapefile "./zz_QGis/Shapefiles/sud-est_DSM.shp"
