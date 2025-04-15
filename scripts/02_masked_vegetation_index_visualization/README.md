@@ -15,14 +15,15 @@ This script, `masked_vegetation_index_extraction_bash.py`, is designed to extrac
 To run this script, use the following command in your terminal or command prompt:
 
 ```bash
-python masked_vegetation_index_extraction_bash.py --shapefile_path [path_to_shapefile] --date [date] --ndvi_threshold [ndvi_threshold] --indices_to_save [index1] [index2] ... [indexN] --subfolder [subfolder_name]
+python masked_vegetation_index_extraction_bash.py --shapefile_path [path_to_shapefile] --site [site] --date [date] --region [subfolder] --ndvi_threshold [ndvi_threshold] --indices_to_save [index1] [index2] ... [indexN] 
 ```
 
 - **`--shapefile_path [path_to_shapefile]`**: The path to the shapefile used for masking.
+- **`--site [site]`**: The site  representing the directory to process.
 - **`--date [date]`**: The date string representing the directory to process.
+- **`--region [subfolder_name]`**: Specify a subfolder under the date directory.
 - **`--ndvi_threshold [ndvi_threshold]`**: The threshold value for NDVI filtering.
 - **`--indices_to_save [index1] [index2] ... [indexN]`**: List of indices to save (e.g., NDVI, NDRE).
-- **`--subfolder [subfolder_name]`**: (Optional) Specify a subfolder under the date directory if necessary.
 
 ### Example
 
@@ -32,7 +33,6 @@ If you have a shapefile located at `G:/GISPyHelpers/data/zz_QGis/Shapefiles/Area
 python .\scripts\02_masked_vegetation_index_visualization\masked_vegetation_index_extraction.py --shapefile_path G:/GISPyHelpers/data/zz_QGis/Shapefiles/Area_DSM.shp --site Ruetti --date 2020-06-03 --region Area --ndvi_threshold 0.3 --indices_to_save NDVI NDRE
 ```
 
-If there is no subfolder, simply omit the `--subfolder` option.
 
 ## Dependencies
 - Python 3.x
