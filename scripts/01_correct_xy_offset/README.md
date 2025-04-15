@@ -53,7 +53,7 @@ pip install rasterio numpy matplotlib
 ```
 
 ## JSON File
-The script expects a JSON file containing the shift values for the coordinates. The JSON file should be named in the format `shifts_[subfolder].json` if a subfolder is specified, or `shifts.json` otherwise. This JSON file must be stored in the same directory as the script or in a path that the script can access.
+The script expects a JSON file containing the shift values for the coordinates. The JSON file should be named in the format `shifts.json`. This JSON file must be stored in the region (subfolder) directory.
 
 The JSON file should have the following structure:
 
