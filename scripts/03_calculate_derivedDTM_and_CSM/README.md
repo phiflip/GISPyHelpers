@@ -22,19 +22,14 @@ python calculate_derivedDTM.py --shapefile [path_to_shapefile] --date [date] --p
 ```
 
 - **`--shapefile [path_to_shapefile]`**: The path to the shapefile used for masking or region-specific processing.
+- **`--site [site]`**: The site representing the directory to process.
 - **`--date [date]`**: The date string representing the directory to process.
+- **`--region [subfolder_name]`**: Specify a subfolder under the date directory.
 - **`--pixel_size_factor [factor]`**: The factor by which to scale the pixel size (e.g., 2).
-- **`--subfolder [subfolder_name]`**: (Optional) Specify a subfolder under the date directory if necessary.
 
 ### Example
 
-If you have a shapefile located at `G:/GISData/Regions.shp` and want to process data from the date `2020-06-03`, scaling the pixel size by a factor of `2`, with results stored in a subfolder called `south`, run the script as follows:
-
-```bash
-python calculate_derivedDTM.py --date 2020-06-03 --pixel_size_factor 2 --shapefile G:/GISData/Regions.shp --subfolder south
-```
-
-If there is no subfolder, simply omit the `--subfolder` option:
+If you have a shapefile located at `G:/GISData/Area.shp` and want to process data from the date `2020-06-03`, scaling the pixel size by a factor of `1.5`, with results stored in a subfolder called `Area`, run the script as follows:
 
 ```bash
 python .\scripts.\03_calculate_derivedDTM_and_CSM\calculate_derivedDTM.py --shapefile ./data/zz_QGis/Shapefiles/Area.shp --site Ruetti --date 2020-06-03 --region Area --pixel_size_factor 1.5
