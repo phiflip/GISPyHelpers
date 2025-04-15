@@ -15,6 +15,12 @@ This routine was used in the *estiGrass3D+* paper titled **"Herbage biomass pred
 - **Integration with Custom Modules**: The script integrates with custom modules like `module_DTMmodel` for advanced processing.
 
 ## Usage
+**Make sure you are in the root directory of the project**, specifically the `GISPyHelpers` folder. All relative paths used by the script assume this as the working directory.
+
+Navigate to the root like this:
+```bash
+cd path/to/GISPyHelpers
+```
 To run this script, use the following command in your terminal or command prompt:
 
 ```bash
