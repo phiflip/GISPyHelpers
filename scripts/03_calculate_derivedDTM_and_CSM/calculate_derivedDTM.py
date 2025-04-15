@@ -10,44 +10,47 @@ import sys
 import rasterio
 import rasterio.plot
 import numpy as np
-import matplotlib.pyplot as plt
 from skimage import filters
 import fiona
-from scipy.stats import norm
 from shapely.geometry import shape
 import argparse
 
-# Add the path to your custom module
+# Ensure project root and modules folder are on the Python path
+try:
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    script_dir = os.getcwd()
 
-sys.path.append('G:/GISPyHelpers/modules')
+root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
+sys.path.append(root_dir)
+sys.path.append(os.path.join(root_dir, "modules"))
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
 import module_DTMmodel as DTMm
-
-# sys.path.append("D:/aa_Weidemanagement/P4_Multispectral/00_Codes")
-# import module_DTMmodel_vfibl as DTMm #muss noch angepasst werden - die 10fache Pixelgrösse passt bei sehr hohen Beständen. nicht aber kleinen.
 
 
 # Argumente von der Befehlszeile einlesen
 parser = argparse.ArgumentParser(description='Process some integers.')
-parser.add_argument('--date', type=str,
-                    help='Date for the filename', required=True)
-parser.add_argument('--pixel_size_factor', type=float,
-                    help='Factor for pixel size - the higher the factor, the smaller the moving windows', required=True)
-parser.add_argument('--subfolder', type=str,
-                    help='Subfolder within the date directory', required=False)
-parser.add_argument('--shapefile', type=str,
-                    help='Path to the shapefile', required=True)
+parser.add_argument('--shapefile', type=str, help='Path to the shapefile', required=True)
+parser.add_argument("--site", required=True, help="Site of the dataset")
+parser.add_argument("--date", required=True, help="Date of the dataset (format: YYYY-MM-DD)")
+parser.add_argument("--region", required=True, help="Subfolder within the date directory")
+parser.add_argument('--pixel_size_factor', type=float, help='Factor for pixel size - the higher the factor, the smaller the moving windows', required=True)
+parser.add_argument('--subfolder', type=str, help='Subfolder within the date directory', required=False)
 args = parser.parse_args()
 
-date = args.date
-pixelSizeX_factor = args.pixel_size_factor
-subfolder = args.subfolder
 shapefile_path = args.shapefile
+site = args.site
+date = args.date
+region = args.region
+pixelSizeX_factor = args.pixel_size_factor
 
 # Define the base path pattern
-if subfolder:
-    path_to_data = os.path.join(date, subfolder, "Agisoft", "Agi_EXPORT")
+if region:
+    path_to_data = os.path.join(project_root, "data", site, date, region, "Agisoft", "Agi_EXPORT")
 else:
-    path_to_data = os.path.join(date, "Agisoft", "Agi_EXPORT")
+    path_to_data = os.path.join(project_root, "data", site, date, "Agisoft", "Agi_EXPORT")
 
 #################################################################################
 # Read data and print details
@@ -82,7 +85,7 @@ print("Shapefile loaded!")
 clipped_array_DSM_1, out_meta = DTMm.clip(shp_geom, read_DSM)
 clipped_array_DSM_2, out_meta = DTMm.clip(shp_geom, read_DSM)
 
-data_dir = '.\\zz_PythonCodes\\__temp_data_dir'
+# data_dir = '.\\zz_PythonCodes\\__temp_data_dir'
 
 # get metadata
 affine = out_meta["transform"]

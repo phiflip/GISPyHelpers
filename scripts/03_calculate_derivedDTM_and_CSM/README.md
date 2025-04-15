@@ -37,7 +37,7 @@ python calculate_derivedDTM.py --date 2020-06-03 --pixel_size_factor 2 --shapefi
 If there is no subfolder, simply omit the `--subfolder` option:
 
 ```bash
-python calculate_derivedDTM.py --date 2020-06-03 --pixel_size_factor 2 --shapefile G:/GISData/Regions.shp
+python .\scripts.\03_calculate_derivedDTM_and_CSM\calculate_derivedDTM.py --shapefile ./data/zz_QGis/Shapefiles/Area.shp --site Ruetti --date 2020-06-03 --region Area --pixel_size_factor 1.5
 ```
 
 ## Dependencies

@@ -8,23 +8,31 @@ import os
 import argparse
 import rasterio
 import numpy as np
-import matplotlib.pyplot as plt
 import fiona
 from pyproj import CRS
 from shapely.geometry import shape
 import sys
 
-# Add path to module
-sys.path.append('G:/GISPyHelpers/modules')
+# Ensure project root and modules folder are on the Python path
+try:
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+except NameError:
+    script_dir = os.getcwd()
+
+root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
+sys.path.append(root_dir)
+sys.path.append(os.path.join(root_dir, "modules"))
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 import multichannel_index_definitions as mcvi
 
-def main(shapefile_path, date, ndvi_threshold, indices_to_save, subfolder=None):
+def main(shapefile_path, site, date, region, ndvi_threshold, indices_to_save):
     # Define the base path pattern
-    if subfolder:
-        base_path_pattern = os.path.join(date, subfolder, "Agisoft", "Agi_EXPORT")
+    if region:
+        base_path_pattern = os.path.join(project_root, "data", site, date, region, "Agisoft", "Agi_EXPORT")
     else:
-        base_path_pattern = os.path.join(date, "Agisoft", "Agi_EXPORT")
+        base_path_pattern = os.path.join(project_root, "data", site, date, "Agisoft", "Agi_EXPORT")
     
     # Reading data and setting paths
     filename = date + "_allChannels.tif" #_xy_transformed
@@ -130,10 +138,11 @@ def main(shapefile_path, date, ndvi_threshold, indices_to_save, subfolder=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process GIS data and calculate vegetation indices.")
     parser.add_argument("--shapefile_path", required=True, help="Path to the shapefile")
+    parser.add_argument("--site", required=True, help="Site of the dataset")
     parser.add_argument("--date", required=True, help="Date of the dataset (format: YYYY-MM-DD)")
+    parser.add_argument("--region", required=False, help="Subfolder within the date directory")
     parser.add_argument("--ndvi_threshold", type=float, required=True, help="NDVI threshold for mask")
     parser.add_argument("--indices_to_save", nargs='+', required=True, help="List of indices to save (e.g., NDVI WDRVI)")
-    parser.add_argument("--subfolder", required=False, help="Subfolder within the date directory")
 
     args = parser.parse_args()
-    main(args.shapefile_path, args.date, args.ndvi_threshold, args.indices_to_save, args.subfolder)
+    main(args.shapefile_path, args.site, args.date,args.region, args.ndvi_threshold, args.indices_to_save)

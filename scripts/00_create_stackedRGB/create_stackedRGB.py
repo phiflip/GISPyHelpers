@@ -65,8 +65,8 @@ def process_images_for_date(date, subfolder=None):
     # plt.title(f"RGB Image for {date} (Brightness Enhanced)")
     # plt.show()
 
-    # Optionally save the RGB image as a new GeoTIFF file
-    output_path = join(base_path_pattern, "output_rgb.tif")
+    # Save the RGB image with the date in the filename
+    output_path = join(base_path_pattern, f"{date}_output_rgb.tif")
     with rasterio.open(
         output_path,
         'w',

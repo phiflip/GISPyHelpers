@@ -13,6 +13,11 @@ from rasterio.mask import mask
 import cv2
 import json
 
+import warnings
+
+# Unterdrücke alle Runtime-Warnungen
+warnings.filterwarnings("ignore", category=RuntimeWarning)
+
 #  Clipping
 
 

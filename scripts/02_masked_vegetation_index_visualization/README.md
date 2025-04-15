@@ -29,7 +29,7 @@ python masked_vegetation_index_extraction_bash.py --shapefile_path [path_to_shap
 If you have a shapefile located at `G:/GISPyHelpers/data/zz_QGis/Shapefiles/Area_DSM.shp` and want to process data from the date `2020-06-03`, applying an NDVI threshold of `0.3` and saving the indices `NDVI` and `NDRE`, run the script as follows:
 
 ```bash
-python masked_vegetation_index_extraction_bash.py --shapefile_path G:/GISPyHelpers/data/zz_QGis/Shapefiles/Area_DSM.shp --date 2020-06-03 --ndvi_threshold 0.3 --indices_to_save NDVI NDRE
+python .\scripts\02_masked_vegetation_index_visualization\masked_vegetation_index_extraction.py --shapefile_path G:/GISPyHelpers/data/zz_QGis/Shapefiles/Area_DSM.shp --site Ruetti --date 2020-06-03 --region Area --ndvi_threshold 0.3 --indices_to_save NDVI NDRE
 ```
 
 If there is no subfolder, simply omit the `--subfolder` option.
