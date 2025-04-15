@@ -18,22 +18,19 @@ To run this script, use the following command in your terminal or command prompt
 python correct_xy_offset.py [date] --file_suffixes [suffix1] [suffix2] ... [suffixN] --subfolder [subfolder_name]
 ```
 
+- **`[site]`**: Specify the site directory.
 - **`[date]`**: The date string representing the directory to process.
+- **`--region [subfolder_name]`**:  Specify the subfolder under the date directory.
 - **`--file_suffixes [suffix1] [suffix2] ... [suffixN]`**: List of file suffixes to process.
-- **`--subfolder [subfolder_name]`**: (Optional) Specify a subfolder under the date directory if necessary.
 
 ### Example
 
-If you have images from the date `2020-06-03` stored in a directory, and these directories have a subfolder called `south`, and you want to correct files with suffixes `_allChannels` and `_DSM`, run the script as follows:
+If you have images from the date `2020-06-03` stored in a directory, and these directories have a subfolder called `Area`, and you want to correct files with suffixes `_allChannels` and `_DSM`, run the script as follows:
 
 ```bash
 python correct_xy_offset.py --site Ruetti --date 2020-06-04 --region Area --file_suffixes _allChannels.tif _DSM.tif
 ```
 
-
-```bash
-python correct_xy_offset.py --date 2020-06-03 --file_suffixes _allChannels.tif _DSM.tif
-```
 
 ## Dependencies
 - Python 3.x
