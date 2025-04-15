@@ -12,7 +12,15 @@ The script reads offset values from a JSON file, applies the shifts to the image
 - **Batch Processing**: Supports processing of multiple image files based on date or folder structure.
 
 ## Usage
+
+ **Make sure you are in the root directory of the project**, specifically the `GISPyHelpers` folder. All relative paths used by the script assume this as the working directory.
+
+Navigate to the root like this:
+```bash
+cd path/to/GISPyHelpers
+```
 To run this script, use the following command in your terminal or command prompt:
+
 
 ```bash
 python correct_xy_offset.py [date] --file_suffixes [suffix1] [suffix2] ... [suffixN] --subfolder [subfolder_name]
