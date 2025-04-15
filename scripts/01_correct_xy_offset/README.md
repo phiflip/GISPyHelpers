@@ -23,7 +23,7 @@ To run this script, use the following command in your terminal or command prompt
 
 
 ```bash
-python correct_xy_offset.py [date] --file_suffixes [suffix1] [suffix2] ... [suffixN] --subfolder [subfolder_name]
+python correct_xy_offset.py --site [site] --date [date] --region [subfolder_name] --file_suffixes [suffix1] [suffix2] ... [suffixN] 
 ```
 
 - **`[site]`**: Specify the site directory.
