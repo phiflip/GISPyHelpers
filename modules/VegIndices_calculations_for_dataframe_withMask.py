@@ -109,7 +109,7 @@ def vi_calcs_for_df(
 
     month_ls = []
     hour_ls = []
-    shutterSpeed_avg_ls = []
+    # shutterSpeed_avg_ls = []
     counter = 0
     for shp_geom in all_shapes:
         counter = counter+1
@@ -125,10 +125,10 @@ def vi_calcs_for_df(
 
         multiChannel_array_trans = multiChannel_array.transpose((1, 2, 0))
 
-        # WEshalb durch 32768 teilen?
-        # Check here: https://agisoft.freshdesk.com/support/solutions/articles/31000148780-micasense-rededge-mx-processing-workflow-including-reflectance-calibration-in-agisoft-metashape-pro
-        # wegen Agisoftihr export als 16bit tif, mit der division wird den Reflexionsgrad auf den Bereich 0 - 1 normiert.
-
+        # Why divide by 32768?
+        # Reference: https://agisoft.freshdesk.com/support/solutions/articles/31000148780-micasense-rededge-mx-processing-workflow-including-reflectance-calibration-in-agisoft-metashape-pro
+        # Agisoft exports 16-bit TIFFs; dividing by 32768 normalizes the reflectance values to a 0–1 range.
+        
         if cameratype == 0:  # dji
 
             blue = multiChannel_array_trans[:, :, 0].astype(float)/32768
@@ -384,11 +384,12 @@ def vi_calcs_for_df(
         #################################################################################
         #%% collect exif data
         #################################################################################
-        all_images = glob.glob(path_to_images+"**/*.jpg", recursive=True)
+        all_images = glob.glob(os.path.join(path_to_images, "**", "*.jpg"), recursive=True)
+
 
         images_for_calcs = all_images[0::10]
 
-        shutterSpeed = 0
+        # shutterSpeed = 0
         hour = 0
 
         for s in images_for_calcs:
@@ -398,18 +399,18 @@ def vi_calcs_for_df(
                     for k, v in img._getexif().items()
                     if k in PIL.ExifTags.TAGS}
 
-            shutterSpeed = shutterSpeed+exif["ExposureTime"]  # [0]
+            # shutterSpeed = shutterSpeed+exif["ExposureTime"]  # [0]
 
             hour = hour+int(exif["DateTime"][-8:-6])
 
         # *1000 to have it in ms
-        shutterSpeed_avg = float(shutterSpeed/len(images_for_calcs))*1000
+        # shutterSpeed_avg = float(shutterSpeed/len(images_for_calcs))*1000
         hour_avg = int(hour/len(images_for_calcs))
         month = int(exif["DateTime"][5:7])
 
         month_ls.append(month)
         hour_ls.append(hour_avg)
-        shutterSpeed_avg_ls.append(shutterSpeed_avg)
+        # shutterSpeed_avg_ls.append(shutterSpeed_avg)
     ############################################################################################
 
     #######################################################
@@ -438,7 +439,8 @@ def vi_calcs_for_df(
                                      ndre_mean_ls, ndre_med_ls, ndre_std_ls,
                                      grvi_mean_ls, grvi_med_ls, grvi_std_ls,
                                      mgrvi_mean_ls, mgrvi_med_ls, mgrvi_std_ls,
-                                     month_ls, hour_ls, shutterSpeed_avg_ls
+                                     month_ls, hour_ls,
+                                      # shutterSpeed_avg_ls
                                      )),
                             columns=["STR",
                                      "GREEN_mean", "GREEN_med", "GREEN_std",
@@ -461,7 +463,9 @@ def vi_calcs_for_df(
                                      "NDRE_mean", "NDRE_med", "NDRE_std",
                                      "GRVI_mean", "GRVI_med", "GRVI_std",
                                      "MGRVI_mean", "MGRVI_med", "MGRVI_std",
-                                     "month", "hour", "shutterSpeed"])
+                                     "month", "hour", 
+                                      # "shutterSpeed"
+                                     ])
 
     final_df = final_df.set_index('STR')
 
