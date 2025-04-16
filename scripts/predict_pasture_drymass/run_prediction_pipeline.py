@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath(os.path.join(script_dir, "..", "..")))
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 
-from config_prediction import DEFAULTS, SITE_REGION_MAP, DATES, MASL_DEFAULT
+from config_prediction import DEFAULTS, SITE_REGION_MAP, DATES, MASL_DEFAULT, CAMERATYPE, USE
 from scripts.predict_pasture_drymass.prepare_dataframe import prepare_df
 from scripts.predict_pasture_drymass.model_utils import load_model, predict
 from features import extract_height_features, extract_vi_features
@@ -25,7 +25,7 @@ def main(date, region, site, model_name):
     print(f"  Date: {date}\n  Region: {region}\n  Site: {site}\n  Model: {model_name}")
     print("="*60)
     print("\n--- Starting Prediction Pipeline ---")
-    print(f"Date: {date} | Region: {region} | Site: {site}\n")
+    print(f"Date: {date} | Region: {region} | Site: {site} | Use: {USE}\n")
 
     # Step 1: Generate height data
     print("[STEP] Running extract_height_features...")
@@ -47,7 +47,7 @@ def main(date, region, site, model_name):
 
     # Step 3: Prepare dataframe
     print("[STEP] Preparing final DataFrame for prediction...")
-    df = prepare_df(date, region, site)
+    df = prepare_df(date, region, site, CAMERATYPE, USE)
 
     # Step 4: Load model
     print("[STEP] Loading model...")

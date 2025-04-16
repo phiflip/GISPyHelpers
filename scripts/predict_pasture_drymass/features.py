@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import fiona
 from shapely.geometry import shape
+import traceback
+
 
 # Ensure project root and modules folder are on the Python path
 try:
@@ -110,8 +112,10 @@ def extract_vi_features(date, masl, site, region, base_dir=".", cameratype=1):
             cameratype=cameratype
         )
     except Exception as e:
+       
+        traceback.print_exc()
         raise RuntimeError(f"VI calculation failed: {e}")
-
+    
     try:
         print(f"[DEBUG] Reading base CSV from {path_to_csv}...")
         base_df = pd.read_csv(path_to_csv, index_col="STR")

@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 
-def prepare_df(date, region, site):
+def prepare_df(date, region, site, cameratype, use):
     """
     Reads the combined height + VI data, computes derived features,
     cleans the DataFrame and returns it ready for prediction.
@@ -24,8 +24,8 @@ def prepare_df(date, region, site):
 
     # Clean up
     df.dropna(inplace=True)
-    df["Cameratype"] = 1
-    df["Use"] = 0
+    df["Cameratype"] = cameratype
+    df["Use"] = use
 
     df.rename(columns={
         "std_dev": "CH_stdev",

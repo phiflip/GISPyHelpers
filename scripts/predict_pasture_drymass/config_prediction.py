@@ -7,6 +7,10 @@ DEFAULTS = {
     "model_name": "estiGrass3Dplus.pkl"
 }
 
+CAMERATYPE = 1 #0 for five channels 1 for 4 channels 
+USE = 0 # 0 for pasture use, 1 for cutting use
+
+
 # Site-to-region mapping for batch processing
 SITE_REGION_MAP = {
     "Ruetti": ["Area"],
