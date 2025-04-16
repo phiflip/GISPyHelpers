@@ -20,11 +20,6 @@ from rasterio.mask import mask
 from pyproj import CRS
 
 
-if __name__ == "__main__":
-    print("module_DTMmodel.py is being run directly")
-else:
-    print("module_DTMmodel.py was imported into this script")
-    
 
 
 def getFeatures(gdf):
