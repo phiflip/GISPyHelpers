@@ -16,16 +16,34 @@ def prepare_df(date, region, site, cameratype, use):
 
     df = pd.read_csv(filepath)
     df = df.set_index("STR")
+    
+    
 
     # Derived features
     df["CCCI_mean"] = df["NDRE_mean"] / df["NDVI_mean"]
-    df["pastureI"] = df["fifty_perc"] + df["WDRVI_mean"]
     df["PastureI"] = df["ninety_perc"] + df["WDRVI_mean"]
 
     # Clean up
     df.dropna(inplace=True)
     df["Cameratype"] = cameratype
     df["Use"] = use
+
+
+    
+        
+    if df["Cameratype"].iloc[0] == 2:
+        df["GCI_mean"] *= 0.65
+        df["GNDVI_mean"] *= 0.9
+        df["CCCI_mean"] *= 0.8
+        # df["PastureI"] *= 0.95
+        df["WDRVI_mean"] *= 0.9
+
+        
+        print("VI correction ACTIVE")
+
+
+
+
 
     df.rename(columns={
         "std_dev": "CH_stdev",
@@ -35,6 +53,7 @@ def prepare_df(date, region, site, cameratype, use):
         "GREENSRATIO_std": "GREENSRATIO_stdev",
         "month": "Month",
         "fifty_perc": "CH_P50",
+        
     }, inplace=True)
 
     # Keep only relevant features

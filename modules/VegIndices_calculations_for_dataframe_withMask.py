@@ -145,12 +145,15 @@ def vi_calcs_for_df(
             nir = multiChannel_array_trans[:, :, 3].astype(float)/32768
             # alpha = multiChannel_array_trans[:,:,4].astype(float)
 
-        # elif cameratype==2: #dji Mavic3M
-        #     green = multiChannel_array_trans[:,:,0].astype(float)/32768
-        #     red = multiChannel_array_trans[:,:,1].astype(float)/32768
-        #     rededge = multiChannel_array_trans[:,:,2].astype(float)/32768
-        #     nir = multiChannel_array_trans[:,:,3].astype(float)/32768
-        #     # alpha = multiChannel_array_trans[:,:,4].astype(float)
+        elif cameratype == 2: #dji Mavic3M
+            green = multiChannel_array_trans[:,:,0].astype(float)/32768
+            red = multiChannel_array_trans[:,:,1].astype(float)/32768
+            rededge = multiChannel_array_trans[:,:,2].astype(float)/32768
+            nir = multiChannel_array_trans[:,:,3].astype(float)/32768
+            # alpha = multiChannel_array_trans[:,:,4].astype(float)
+            
+
+
 
         #################################################################################
         #%% RAW bands calculations

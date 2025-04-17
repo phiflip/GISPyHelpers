@@ -19,7 +19,7 @@ sys.path.append(os.path.join(root_dir, "modules"))
 
 from module_DTMmodel import clip
 from VegIndices_calculations_for_dataframe_withMask import vi_calcs_for_df
-from config_prediction import NDVI_THRESHOLD
+from config_prediction import NDVI_THRESHOLD, CAMERATYPE
 
 
 def load_shapefile(shapefile_path):
@@ -85,7 +85,7 @@ def extract_height_features(date, site, region, base_dir="."):
 
 
 
-def extract_vi_features(date, masl, site, region, base_dir=".", cameratype=1):
+def extract_vi_features(date, masl, site, region, base_dir=".", cameratype=CAMERATYPE):
     print("[DEBUG] Running extract_vi_features...")
     
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
