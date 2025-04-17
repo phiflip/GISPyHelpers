@@ -12,7 +12,8 @@ from rasterio.transform import from_origin
 from matplotlib import pylab as plt
 import argparse
 
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+# project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+project_root = os.getcwd()
 
 
 def process_images(site, date, region, file_suffixes ):
@@ -20,7 +21,7 @@ def process_images(site, date, region, file_suffixes ):
     plt.close("all")
 
     # Load the reference coordinates and shifts from the JSON file
-    json_path = os.path.join(project_root,"data", site, date, region, 'shifts.json') if region else 'shifts.json'
+    json_path = os.path.join(project_root, "data", site, 'shifts.json') if region else 'shifts.json'
 
     with open(json_path, 'r') as f:
         data = json.load(f)

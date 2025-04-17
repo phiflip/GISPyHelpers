@@ -25,7 +25,8 @@ root_dir = os.path.abspath(os.path.join(script_dir, "..", ".."))
 sys.path.append(root_dir)
 sys.path.append(os.path.join(root_dir, "modules"))
 
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+# project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+project_root = os.getcwd()
 
 import module_DTMmodel as DTMm
 
