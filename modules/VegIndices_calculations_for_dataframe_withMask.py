@@ -5,7 +5,7 @@ import PIL.ExifTags
 import glob
 import numpy as np
 import os
-os.chdir('G:/GISPyHelpers/modules/')
+os.chdir('N:/AGR/GISPyHelpers/modules/')
 import multichannel_index_definitions as mcvi
 
 # file MultiChannel_VegIndices.py

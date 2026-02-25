@@ -1,7 +1,7 @@
 
 Last Run:
-Timestamp: 2025-04-17 14:29:28
-Region: RJ4
-Site: Gysenstein
-Date: 2025-04-14
+Timestamp: 2026-02-16 16:41:34
+Region: 3_Weide
+Site: Balsingen
+Date: 2025-10-02
 Model: estiGrass3Dplus.pkl

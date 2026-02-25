@@ -5,6 +5,7 @@ import numpy as np
 import fiona
 from shapely.geometry import shape
 import traceback
+from config_prediction import NDVI_THRESHOLD, CAMERATYPE, DATA_ROOT, SHAPE_ROOT, RASTER_VARIANT, SHAPEFILE_NAME
 
 
 # Ensure project root and modules folder are on the Python path
@@ -19,7 +20,6 @@ sys.path.append(os.path.join(root_dir, "modules"))
 
 from module_DTMmodel import clip
 from VegIndices_calculations_for_dataframe_withMask import vi_calcs_for_df
-from config_prediction import NDVI_THRESHOLD, CAMERATYPE
 
 
 def load_shapefile(shapefile_path):
@@ -52,13 +52,23 @@ def compute_height_stats(csm_array):
 
 def extract_height_features(date, site, region, base_dir="."):
     # Set the project root to navigate all paths relative to it
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    # project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
     
-    # Paths based on the project root
-    path_to_data = os.path.join(project_root, "data", site, date, region, "Agisoft", "Agi_EXPORT")
-    csm_file = f"{date}_clipped_CSM.tif"
-    shapefile_path = os.path.join(project_root, "data", "zz_QGis", "Shapefiles", f"{region}.shp")
-    output_csv_path = os.path.join(project_root, "data", "zz_Results", f"{date}_{region}.csv")
+    suffix = "" if RASTER_VARIANT == "raw" else f"_{RASTER_VARIANT}"
+
+    path_to_data = os.path.join(DATA_ROOT, site, date, region, "Agisoft", "Agi_EXPORT")
+    csm_file = f"{date}_clipped_CSM{suffix}.tif"
+    
+    shp = SHAPEFILE_NAME if SHAPEFILE_NAME else f"{region}.shp"
+    shapefile_path = os.path.join(SHAPE_ROOT, shp)
+
+    output_csv_path = os.path.join(
+        DATA_ROOT,
+        "zz_Results",
+        f"{date}_{region}{suffix}.csv"
+    )
+
+    # output_csv_path = os.path.join(project_root, "data", "zz_Results", f"{date}_{region}.csv")
 
     # Load shapefile
     geometries, ids = load_shapefile(shapefile_path)
@@ -87,14 +97,22 @@ def extract_height_features(date, site, region, base_dir="."):
 
 def extract_vi_features(date, masl, site, region, base_dir=".", cameratype=CAMERATYPE):
     print("[DEBUG] Running extract_vi_features...")
+    suffix = "" if RASTER_VARIANT == "raw" else f"_{RASTER_VARIANT}"
     
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-    export_path = os.path.join(project_root,"data", site, date, region, "Agisoft", "Agi_EXPORT")
+    export_path = os.path.join(DATA_ROOT, site, date, region, "Agisoft", "Agi_EXPORT")
+    read_all_channels = os.path.join(export_path, f"{date}_allChannels_xy_transformed{suffix}.tif")
     
-    read_all_channels = os.path.join(export_path, f"{date}_allChannels_xy_transformed.tif")
-    path_to_images = os.path.join(project_root, "data", site, date, region, "Fotos")
-    path_to_csv = os.path.join(project_root,"data", "zz_Results", f"{date}_{region}.csv")
-    shapefile_path = os.path.join(project_root, "data", "zz_QGis", "Shapefiles", f"{region}.shp")
+    path_to_images = os.path.join(DATA_ROOT, site, date, region, "Fotos")
+    path_to_csv = os.path.join(
+        DATA_ROOT,
+        "zz_Results",
+        f"{date}_{region}{suffix}.csv"
+    )    
+    shp = SHAPEFILE_NAME if SHAPEFILE_NAME else f"{region}.shp"
+    shapefile_path = os.path.join(SHAPE_ROOT, shp)
+
+
+
     
     print(f"[DEBUG] Reading shapefile from {shapefile_path}...")
     geometries, ids = load_shapefile(shapefile_path)

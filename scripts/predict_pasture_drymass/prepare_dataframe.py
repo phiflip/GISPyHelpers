@@ -1,18 +1,20 @@
 import pandas as pd
 import os
-
+from config_prediction import DATA_ROOT, RASTER_VARIANT
 
 def prepare_df(date, region, site, cameratype, use):
     """
     Reads the combined height + VI data, computes derived features,
     cleans the DataFrame and returns it ready for prediction.
     """
-    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    # project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
     
-    base_path = f"{project_root}/data/zz_Results/"
-    filename = f"{date}_{region}.csv"
+    base_path = os.path.join(DATA_ROOT, "zz_Results")
+    suffix = "" if RASTER_VARIANT == "raw" else f"_{RASTER_VARIANT}"
+    filename = f"{date}_{region}{suffix}.csv"
     filepath = os.path.join(base_path, filename)
+    
 
     df = pd.read_csv(filepath)
     df = df.set_index("STR")

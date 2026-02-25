@@ -2,6 +2,8 @@ import sys
 import os
 import argparse
 from datetime import datetime
+from config_prediction import DEFAULTS, SITE_REGION_MAP, DATES, MASL_DEFAULT, CAMERATYPE, USE, DATA_ROOT, RASTER_VARIANT
+
 
 try:
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -13,7 +15,7 @@ sys.path.append(os.path.abspath(os.path.join(script_dir, "..", "..")))
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 
-from config_prediction import DEFAULTS, SITE_REGION_MAP, DATES, MASL_DEFAULT, CAMERATYPE, USE
+# from config_prediction import DEFAULTS, SITE_REGION_MAP, DATES, MASL_DEFAULT, CAMERATYPE, USE
 from scripts.predict_pasture_drymass.prepare_dataframe import prepare_df
 from scripts.predict_pasture_drymass.model_utils import load_model, predict
 from features import extract_height_features, extract_vi_features
@@ -59,7 +61,10 @@ def main(date, region, site, model_name):
 
     # Step 6: Save results in local "results" folder
     print("[STEP] Saving predictions to CSV...")
-    out_path = os.path.join(project_root, "data","zz_Results", f"{date}_{region}_predictions.csv")
+    
+    suffix = "" if RASTER_VARIANT == "raw" else f"_{RASTER_VARIANT}"
+    out_path = os.path.join(DATA_ROOT, "zz_Results", f"{date}_{region}{suffix}_predictions.csv")
+
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
     df["Prediction_DM"] = predictions
